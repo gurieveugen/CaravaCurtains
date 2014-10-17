@@ -93,7 +93,16 @@
 					?>
 				</figure>
 				<header class="tit-page">
-					<?php echo (string) get_post_meta(get_the_id(), 'ao_big_title', true); ?>
+					<?php 
+					if(is_blog())
+					{
+						echo (string) get_post_meta(intval(get_option( 'page_for_posts' )), 'ao_big_title', true);
+					}
+					else
+					{
+						echo (string) get_post_meta(get_the_id(), 'ao_big_title', true);
+					}
+					?>
 				</header>
 				
 				<h3 class="tit-green-page"><a href="/contact/">Wide range of fabrics & colours Request a sample pack</a></h3>
