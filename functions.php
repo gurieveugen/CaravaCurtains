@@ -529,3 +529,84 @@ function twentythirteen_customize_preview_js() {
 	wp_enqueue_script( 'twentythirteen-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
 }
 add_action( 'customize_preview_init', 'twentythirteen_customize_preview_js' );
+
+//     __  ___                        __   
+//    /  |/  /_  __   _________  ____/ /__ 
+//   / /|_/ / / / /  / ___/ __ \/ __  / _ \
+//  / /  / / /_/ /  / /__/ /_/ / /_/ /  __/
+// /_/  /_/\__, /   \___/\____/\__,_/\___/ 
+//        /____/                           
+require_once 'includes/__.php';
+
+$ccollection_global = new Controls\ControlsCollection(
+	array(	
+		new Controls\Text(
+			'Email', 
+			array('default-value' => 'jude@caravancurtains.com.au'), 
+			array('placeholder' => 'Enter your email')
+		),	
+		new Controls\Text(
+			'Phone', 
+			array(
+				'default-value' => '0409 546 559'
+			), 
+			array('placeholder' => 'Enter your phone')
+		),
+		new Controls\Textarea(
+			'Address',
+			array('default-value' => 'Unit 10/28 Belmont Ave, Belmont WA 6104'),
+			array('placeholder' => 'Enter your address')
+		),
+		new Controls\Text(
+			'Latitude',
+			array('default-value' => '-31.954314'),
+			array('placeholder' => 'Enter location latitude')
+		),
+		new Controls\Text(
+			'Longtitude',
+			array('default-value' => '115.919207'),
+			array('placeholder' => 'Enter location longtitude')
+		),
+		new Controls\Text(
+			'Map zoom',
+			array('default-value' => '15'),
+			array('placeholder' => 'Zoom')
+		)
+	)
+);
+
+$ccollection_ao = new Controls\ControlsCollection(
+	array(
+		new Controls\Textarea(
+			'Big title',
+			array('default-value' => ''),
+			array('placeholder' => 'Enter your big title')
+		),
+	)
+);
+
+$section_global    = new Admin\Section(
+	'Global settings', 
+	array(
+		'prefix'   => 'gc_gs_',
+		'tab_icon' => 'fa-cog'
+	), 
+	$ccollection_global
+);
+
+$theme_page = new Admin\Page(
+	'Theme options',
+	array('parent_page' => 'themes.php'),
+	array($section_global)
+);
+
+$mb_post = new Admin\MetaBox(
+	'Additional options',
+	array(
+		'prefix' => 'ao_',
+		'post_type' => 'page'
+	),
+	$ccollection_ao
+);
+
+$map = new GoogleMap();

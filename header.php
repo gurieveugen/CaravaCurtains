@@ -39,7 +39,7 @@
 		  <h1 class="logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 			<nav class="main-menu">
 			  <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false ) ); ?>
-				<div class="phone"><strong>CALL</strong> 0409 546 559</div>
+				<div class="phone"><strong>CALL</strong> <?php echo (string) get_option('gc_gs_phone'); ?></div>
 			</nav>
 		</div>
 	</header>
@@ -49,16 +49,26 @@
 		<?php if(is_front_page()) { ?>
 					<div class="top-content-home">
 				<figure class="img-header-home">
-					<?php if ( has_post_thumbnail() && ! post_password_required() ) : ?>
-					  <?php the_post_thumbnail(); ?>
-					  <?php else: ?>
-						<img src="<?php echo get_template_directory_uri(); ?>/images/uploads/header_home.jpg" alt=" " />
-					<?php endif; ?>
+					<?php
+					if(has_post_thumbnail() && ! post_password_required())
+					{
+						$thumb = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full');
+						?>
+						<img src="<?php echo $thumb[0]; ?>" alt="<?php the_title_attribute(); ?>" />
+						<?php
+					}
+					else
+					{
+						?>
+						<img src="<?php echo get_template_directory_uri(); ?>/images/uploads/header_home.jpg" alt="<?php the_title_attribute(); ?>" />
+						<?php
+					}
+					?>
+					
 				</figure>
 				
 				<header class="tit-home">
-					<h1>Privacy <span>Style</span> Quality</h1>
-					<h2>Proudly Australian Made</h2>
+					<?php echo (string) get_post_meta(get_the_id(), 'ao_big_title', true); ?>
 				</header>
 				
 				<h3 class="tit-green-home"><a href="/contact/">Wide range of fabrics & colours Request a sample pack</a></h3>
@@ -66,15 +76,24 @@
 			<?php } else { ?>
 			<div class="top-content-page">
 				<figure class="img-header-page">
-					<?php if ( has_post_thumbnail() && ! post_password_required() ) : ?>
-						<?php the_post_thumbnail(); ?>
-						<?php else: ?>
-						<img src="<?php echo get_template_directory_uri(); ?>/images/uploads/header_page.jpg" alt=" " />
-					<?php endif; ?>
-					
+					<?php
+					if(has_post_thumbnail() && ! post_password_required())
+					{
+						$thumb = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full');
+						?>
+						<img src="<?php echo $thumb[0]; ?>" alt="<?php the_title_attribute(); ?>" />
+						<?php
+					}
+					else
+					{
+						?>
+						<img src="<?php echo get_template_directory_uri(); ?>/images/uploads/header_page.jpg" alt="<?php the_title_attribute(); ?>" />
+						<?php
+					}
+					?>
 				</figure>
 				<header class="tit-page">
-					<h1>Our <span>Curtains</span></h1>
+					<?php echo (string) get_post_meta(get_the_id(), 'ao_big_title', true); ?>
 				</header>
 				
 				<h3 class="tit-green-page"><a href="/contact/">Wide range of fabrics & colours Request a sample pack</a></h3>

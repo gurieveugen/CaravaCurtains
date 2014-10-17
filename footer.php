@@ -18,7 +18,7 @@
 	  <div class="center-box">
 		  <div class="logo-footer"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></div>
 			<div class="txt">
-			  <p>Unit 10/28 Belmont Ave, Belmont WA 6104 <span>M</span> 0409 546 559  <span>E</span> <a href="mailto:jude@caravancurtains.com.au">jude@caravancurtains.com.au</a></p>
+			  <p><?php echo (string) get_option('gc_gs_address'); ?> <span>M</span> <?php echo (string) get_option('gc_gs_phone'); ?>  <span>E</span> <a href="mailto:<?php echo (string) get_option('gc_gs_email'); ?>"><?php echo (string) get_option('gc_gs_email'); ?></a></p>
 			</div>
 		</div>
 	</footer>
